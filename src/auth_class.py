@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from keystoneauth1.identity import v3
 from keystoneclient.v3 import client
 from keystoneauth1 import session
+from keystoneauth1.exceptions.http import Unauthorized
 from openstack import connection
 
 class Auth_Base(ABC):
@@ -99,4 +100,24 @@ class Token(object):
         token = sess.get_auth_headers()
         return token['X-Auth-Token']
 
+    def is_authenticated(self):
+        sess = session.Session(auth=self.session_auth)
+        try:
+            resp = sess.get('http://172.16.4.200:5000/v3/', authenticated=True)
+            return True
+        except Unauthorized:
+            return False
 
+    def get_identity(self):
+        """
+        Trả về lớp keystoneclient.access.AccessInfoV3
+        """
+        sess = session.Session(auth=self.session_auth)
+        keystone = client.Client(session=sess)        
+        return keystone.get_raw_token_from_identity_service(
+            auth_url='http://172.16.4.200:5000/v3/',
+            token = self.get_token()
+        )
+        
+
+ 
