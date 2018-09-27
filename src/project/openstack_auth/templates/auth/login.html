@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html>
+{% extends 'auth/base.html' %}
 
-<head>
-  <title>Login</title>
-</head>
+{% block title %}Login{% endblock %}
 
-<body>
-  <form method="POST">
+{% block content %}
+  <h2>Login</h2>
+  <form method="post">
     {% csrf_token %}
-    {{ csrf_token }}
     {{ form.as_p }}
-
-    <button type="submit">Đăng nhập</button>
+    <button type="submit">Login</button>
   </form>
-</body>
-
-</html>
+{% endblock %}

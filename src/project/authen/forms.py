@@ -14,7 +14,6 @@ User = get_user_model()
 from openstack_auth import exceptions
 from openstack_auth import utils
 
-LOG = logging.getLogger(__name__)
 
 class LoginForm(forms.Form):
     """

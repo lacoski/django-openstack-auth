@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import views as django_auth_views
+from django.conf import settings
 
 from django.contrib.auth import (
     authenticate,
@@ -45,12 +46,20 @@ def login_view(request):
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get('password')
         try:
-            user = authenticate(request=request,
-                                username=username,
-                                password=password,)
-            #print(user)
-            #json.dumps(user.token)
-            auth_user.set_session_from_user(request, user)
+            # user = authenticate(request=request,
+            #                     username=username,
+            #                     password=password,)
+            # #print(user)
+            # #json.dumps(user.token)
+            # auth_user.set_session_from_user(request, user)
+            user_cache = authenticate(request=request,
+                                      username=username,
+                                      password=password,
+                                      user_domain_name='Default',
+                                      auth_url=settings.OPENSTACK_KEYSTONE_URL)
+            if request.user.is_authenticated:
+                auth_user.set_session_from_user(request, request.user)
+
         except exceptions.KeystoneAuthException as exc:
             print('Login fail')
         
