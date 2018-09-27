@@ -59,6 +59,7 @@ def login_view(request):
                                       auth_url=settings.OPENSTACK_KEYSTONE_URL)
             if request.user.is_authenticated:
                 auth_user.set_session_from_user(request, request.user)
+                login(request, request.user)
 
         except exceptions.KeystoneAuthException as exc:
             print('Login fail')
