@@ -1,14 +1,18 @@
-{% extends "base.html" %}
-{% load i18n %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}{% trans "Login" %}{% endblock %}
+<head>
+  <title>Login</title>
+</head>
 
-{% block body_id %}splash{% endblock %}
+<body>
+  <form method="POST">
+    {% csrf_token %}
+    {{ csrf_token }}
+    {{ form.as_p }}
 
-{% block content %}
-  {% include 'auth/_login.html' %}
-{% endblock %}
+    <button type="submit">Đăng nhập</button>
+  </form>
+</body>
 
-{% block footer %}
-  {% include '_login_footer.html' %}
-{% endblock %}
+</html>

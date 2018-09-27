@@ -129,8 +129,7 @@ def get_session():
     if insecure:
         verify = False
 
-    # return session.Session(verify=verify)
-    return session.Session()
+    return session.Session(verify=verify)    
 
 
 def get_keystone_client():

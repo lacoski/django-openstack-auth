@@ -1,0 +1,1 @@
+# Có cấu hình memcache từ xa (phải có memcache mới có thể chạy)

@@ -30,7 +30,7 @@ LOG = logging.getLogger(__name__)
 
 
 def set_session_from_user(request, user):
-    #request.session['token'] = user.token
+    request.session['token'] = user.token
     request.session['user_id'] = user.id
     request.session['region_endpoint'] = user.endpoint
     request.session['services_region'] = user.services_region

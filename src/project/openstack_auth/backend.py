@@ -94,6 +94,7 @@ class KeystoneBackend(object):
         if not auth_url:
             auth_url = settings.OPENSTACK_KEYSTONE_URL
 
+        #auth_url, url_fixed = utils.fix_auth_url_version_prefix(auth_url)
         auth_url = settings.OPENSTACK_KEYSTONE_URL
         url_fixed = False
         if url_fixed:
