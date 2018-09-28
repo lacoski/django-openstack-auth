@@ -89,8 +89,6 @@ class KeystoneBackend(object):
     def authenticate(self, auth_url=None, **kwargs):
         """Authenticates a user via the Keystone Identity API."""
         LOG.debug('Beginning user authentication')
-        print auth_url
-
         if not auth_url:
             auth_url = settings.OPENSTACK_KEYSTONE_URL
 
